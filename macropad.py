@@ -1,6 +1,7 @@
 import serial
 import time
 import psutil
+import datetime
 
 # mac: /dev/tty.usbmodemHIDJB1
 # win: COM4
@@ -31,19 +32,20 @@ while True:
         dt = time.localtime()
         if (screen == "0"):
             # clock
-            # formatted_date = ":d:"+str(dt.tm_wday) + ', ' + str(dt.tm_mon) + ':' + str(dt.tm_mday)
-            # arduino.write(bytes(formatted_date, 'utf-8'))
+            formatted_date = str(datetime.date.today().strftime(
+                "%A")) + ', ' + str(datetime.date.today().strftime("%B")) + ' ' + str(dt.tm_mday) + '\n'
             formatted_time = str(dt.tm_hour).zfill(2) + ':' + \
                 str(dt.tm_min).zfill(2) + ':' + str(dt.tm_sec).zfill(2)
-            arduino.write(bytes(formatted_time, 'utf-8'))
+            arduino.write(bytes(formatted_date + '$'+formatted_time, 'utf-8'))
+
         elif (screen == "1"):
             # cpu
-            cpu_info = f"CPU Info:\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}\nFrequency: {psutil.cpu_freq().current / 1000}Ghz\nUsage: {psutil.cpu_percent()}%"
+            cpu_info = f"CPU$Usage: {psutil.cpu_percent()}%\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}\nFrequency: {psutil.cpu_freq().current / 1000}Ghz"
             arduino.write(bytes(cpu_info, 'utf-8'))
         elif (screen == "2"):
             # ram
             mem = psutil.virtual_memory()
-            mem_info = f"Memory Info:\nTotal: {get_size(mem.total)}\nUsed: {get_size(mem.used)} ({mem.percent}%)"
+            mem_info = f"Memory$Used: {get_size(mem.used)} ({mem.percent}%)\nTotal: {get_size(mem.total)}\n"
             arduino.write(bytes(mem_info, 'utf-8'))
         last_sec = dt.tm_sec
     last_screen = screen
