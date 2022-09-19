@@ -4,8 +4,9 @@ import psutil
 import datetime
 
 # mac: /dev/tty.usbmodemHIDJB1
+# mac: /dev/tty.usbmodemHIDEF1
 # win: COM4
-arduino = serial.Serial(port='/dev/tty.usbmodemHIDJB1',
+arduino = serial.Serial(port='/dev/tty.usbmodemHIDEF1',
                         baudrate=9600, timeout=.1)
 
 
@@ -24,14 +25,14 @@ def get_size(bytes, suffix="B"):
 
 while True:
     if (arduino.in_waiting > 0):
-        # receive data from arduino
-        screen = str(arduino.readline())[2]
+    # receive data from arduino
+            screen = str(arduino.readline())[2]
 
-    if (last_sec != time.localtime().tm_sec or last_screen != screen and screen != 4):
+    if (last_sec != time.localtime().tm_sec or last_screen != screen):
         # every second OR you changed screens
         dt = time.localtime()
         if (screen == "0"):
-            # clock
+            # date & time
             formatted_date = str(datetime.date.today().strftime(
                 "%A")) + ', ' + str(datetime.date.today().strftime("%B")) + ' ' + str(dt.tm_mday) + '\n'
             formatted_time = str(dt.tm_hour).zfill(2) + ':' + \
@@ -40,12 +41,12 @@ while True:
 
         elif (screen == "1"):
             # cpu
-            cpu_info = f"CPU$Usage: {psutil.cpu_percent()}%\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}\nFrequency: {psutil.cpu_freq().current / 1000}Ghz"
+            cpu_info = f"CPU${psutil.cpu_percent()}%$Frequency: {psutil.cpu_freq().current / 1000}Ghz\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}"
             arduino.write(bytes(cpu_info, 'utf-8'))
         elif (screen == "2"):
             # ram
             mem = psutil.virtual_memory()
-            mem_info = f"Memory$Used: {get_size(mem.used)} ({mem.percent}%)\nTotal: {get_size(mem.total)}\n"
+            mem_info = f"RAM${mem.percent}%$Used: {get_size(mem.used)}\nTotal: {get_size(mem.total)}\n"
             arduino.write(bytes(mem_info, 'utf-8'))
         last_sec = dt.tm_sec
     last_screen = screen

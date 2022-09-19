@@ -10,8 +10,6 @@
 const int pin_c = 5; // green (rotary encoder)
 const int pin_d = 6; // blue (rotary encoder)
 const int pin_s = 7; // orange (rotary encoder button)
-// led
-const int pin_l = 8; // brown (led)
 // oled buttons
 const int pin_ob1 = 9; // yellow (oled button 1)
 const int pin_ob2 = 4; // purple (oled button 2)
@@ -31,14 +29,12 @@ int last_s = LOW;
 int last_ob1 = LOW;
 int last_ob2 = LOW;
 
-
-int count = 500;
 String data = "None";
 int screen = 0;
-// 0: clock
+// 0: date & time
 // 1: cpu
 // 2: memory
-// ram, media, volume
+// media, volume, weather
 
 // initialize oled
 Adafruit_SSD1306 display(128, 64, &Wire, -1);
@@ -56,10 +52,6 @@ void setup()
   pinMode(pin_c, INPUT_PULLUP);
   pinMode(pin_d, INPUT_PULLUP);
   pinMode(pin_s, INPUT_PULLUP);
-
-  // led
-  pinMode(pin_l, OUTPUT);
-
 
   // initialize oled
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
@@ -88,19 +80,32 @@ void loop()
     if (c == HIGH && d == LOW)
     {
       // rotary encoder right
-      Consumer.write(MEDIA_VOLUME_UP);
+      //Consumer.write(MEDIA_VOLUME_UP);
+      Keyboard.press(KEY_LEFT_GUI);
+      Keyboard.press('y');
+      //   Keyboard.press('+');
+
     }
     else if (c == LOW && d == HIGH)
     {
       // rotary encoder left
-      Consumer.write(MEDIA_VOLUME_DOWN);
+      //  Consumer.write(MEDIA_VOLUME_DOWN);
+      Keyboard.press(KEY_LEFT_GUI);
+      Keyboard.press('z');
+      // Keyboard.press('-');
     }
+    Keyboard.releaseAll();
+
   }
 
   if (last_s == HIGH && s == LOW)
   {
     // rotary encoder button button
-    Consumer.write(MEDIA_VOLUME_MUTE);
+    //Consumer.write(MEDIA_VOLUME_MUTE);
+    Keyboard.press(KEY_LEFT_GUI);
+    //Keyboard.press('0');
+    Keyboard.press('s');
+    Keyboard.releaseAll();
   }
 
   if (last_ob1 == HIGH && ob1 == LOW)
@@ -135,18 +140,6 @@ void loop()
   last_ob1 = ob1;
   last_ob2 = ob2;
 
-  // led
-  if (count >= 500)
-  {
-    digitalWrite(pin_l, HIGH);
-    if (count >= 1000)
-    {
-      digitalWrite(pin_l, LOW);
-      count = 0;
-    }
-  }
-
-  count++;
   delay(1);
 }
 
@@ -162,7 +155,7 @@ void draw(void)
   display.setTextColor(SSD1306_WHITE);
 
   // handle data
-  String arr[2];
+  String arr[3];
 
   int j = 0;
   for (int i = 0; i <= data.length(); i++) {
@@ -176,22 +169,27 @@ void draw(void)
   }
 
   if (screen == 0) {
-    // clock
+    // date & time
     display.setTextSize(1);
-    display.setCursor(4, 0);
+    display.setCursor(4, 4);
     display.println(arr[0]);
-    display.setCursor(16, 20);
+    display.setCursor(16, 24);
     display.setTextSize(2);
     display.println(arr[1]);
 
   } else if (screen == 1 || screen == 2) {
     // cpu or ram
-    display.setCursor(0, 0);
+    display.setCursor(0, 4);
     display.setTextSize(2);
     display.println(arr[0]);
-    display.setCursor(0, 20);
-    display.setTextSize(1);
+
+    display.setCursor(68, 4);
+    display.setTextSize(2);
     display.println(arr[1]);
+
+    display.setCursor(0, 24);
+    display.setTextSize(1);
+    display.println(arr[2]);
   }
   display.display();
 }
