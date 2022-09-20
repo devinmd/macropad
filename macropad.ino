@@ -15,8 +15,6 @@ const int pin_ob1 = 9; // yellow (oled button 1)
 const int pin_ob2 = 4; // purple (oled button 2)
 
 
-int x = 0;
-
 // pin values
 int c = LOW; // green
 int d = LOW; // blue
@@ -80,32 +78,32 @@ void loop()
     if (c == HIGH && d == LOW)
     {
       // rotary encoder right
-      //Consumer.write(MEDIA_VOLUME_UP);
-      Keyboard.press(KEY_LEFT_GUI);
-      Keyboard.press('y');
+      Consumer.write(MEDIA_VOLUME_UP);
+     // Keyboard.press(KEY_LEFT_GUI);
+     // Keyboard.press('y');
       //   Keyboard.press('+');
 
     }
     else if (c == LOW && d == HIGH)
     {
       // rotary encoder left
-      //  Consumer.write(MEDIA_VOLUME_DOWN);
-      Keyboard.press(KEY_LEFT_GUI);
-      Keyboard.press('z');
+        Consumer.write(MEDIA_VOLUME_DOWN);
+      //Keyboard.press(KEY_LEFT_GUI);
+     // Keyboard.press('z');
       // Keyboard.press('-');
     }
-    Keyboard.releaseAll();
+    //Keyboard.releaseAll();
 
   }
 
   if (last_s == HIGH && s == LOW)
   {
     // rotary encoder button button
-    //Consumer.write(MEDIA_VOLUME_MUTE);
-    Keyboard.press(KEY_LEFT_GUI);
+    Consumer.write(MEDIA_VOLUME_MUTE);
+   // Keyboard.press(KEY_LEFT_GUI);
     //Keyboard.press('0');
-    Keyboard.press('s');
-    Keyboard.releaseAll();
+    //Keyboard.press('s');
+    //Keyboard.releaseAll();
   }
 
   if (last_ob1 == HIGH && ob1 == LOW)

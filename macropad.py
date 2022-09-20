@@ -6,7 +6,7 @@ import datetime
 # mac: /dev/tty.usbmodemHIDJB1
 # mac: /dev/tty.usbmodemHIDEF1
 # win: COM4
-arduino = serial.Serial(port='/dev/tty.usbmodemHIDEF1',
+arduino = serial.Serial(port='COM4',
                         baudrate=9600, timeout=.1)
 
 
@@ -15,7 +15,7 @@ screen = "0"
 last_screen = "-1"
 
 
-def get_size(bytes, suffix="B"):
+def get_size(bytes, suffix="b"):
     factor = 1024
     for unit in ["", "K", "M", "G", "T", "P"]:
         if bytes < factor:
@@ -25,8 +25,8 @@ def get_size(bytes, suffix="B"):
 
 while True:
     if (arduino.in_waiting > 0):
-    # receive data from arduino
-            screen = str(arduino.readline())[2]
+        # receive data from arduino
+        screen = str(arduino.readline())[2]
 
     if (last_sec != time.localtime().tm_sec or last_screen != screen):
         # every second OR you changed screens
@@ -41,12 +41,21 @@ while True:
 
         elif (screen == "1"):
             # cpu
-            cpu_info = f"CPU${psutil.cpu_percent()}%$Frequency: {psutil.cpu_freq().current / 1000}Ghz\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}"
+            cpu_percent = psutil.cpu_percent()
+            if(len(str(cpu_percent)) == 3):
+
+                cpu_info = f"CPU$ {cpu_percent}%$Frequency: {psutil.cpu_freq().current / 1000}Ghz\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}"
+            else:
+                cpu_info = f"CPU${cpu_percent}%$Frequency: {psutil.cpu_freq().current / 1000}Ghz\nCores: {str(psutil.cpu_count(logical=False))}\nThreads: {str(psutil.cpu_count(logical=True))}"
             arduino.write(bytes(cpu_info, 'utf-8'))
         elif (screen == "2"):
             # ram
             mem = psutil.virtual_memory()
-            mem_info = f"RAM${mem.percent}%$Used: {get_size(mem.used)}\nTotal: {get_size(mem.total)}\n"
+            mem_percent = mem.percent
+            if(len(str(mem_percent)) == 3):
+                mem_info = f"RAM$ {mem.percent}%$Used: {get_size(mem.used)}\nTotal: {get_size(mem.total)}\n"
+            else:
+                mem_info = f"RAM${mem.percent}%$Used: {get_size(mem.used)}\nTotal: {get_size(mem.total)}\n"
             arduino.write(bytes(mem_info, 'utf-8'))
         last_sec = dt.tm_sec
     last_screen = screen
