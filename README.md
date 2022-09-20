@@ -1,11 +1,17 @@
 # macropad
 
-## Device Driver Installation
+cpu and ram usage graph
+network information
+music
+weather
+
+
+## Device Drivers
 
 The macropad is still useable without the drivers, the OLED display will not display any information however
 
 1. Install python from [python.org](https://python.org)
-2. Download `macropad.py`
+2. Download `macropad.pyw`
 3. Open command line
 4. Run the following commands:
     1. `pip install pyserial`
@@ -13,6 +19,9 @@ The macropad is still useable without the drivers, the OLED display will not dis
     3. `pip install speedtest-cli`
 5. Plug in macropad
 6. Run `macropad.py`
+
+
+To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe`
 
 ## Arduino 
 
