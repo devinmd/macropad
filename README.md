@@ -52,13 +52,13 @@ The macropad should already have code uploaded to it, however if you want to edi
 
 
 ## Parts
-- SparkFun Pro Micro (Clone) (x1)
+- SparkFun Pro Micro (Clone) (x1) ($7.00)
   - Processor: ATMega32U4
   - Flash Memory: 32kb
   - Clock Speed: 16Mhz
   - Voltage: 5v
-- 12C 128x64 OLED Display (x1)
-- 20 Step Rotary Encoder (x4)
+- 12C 128x64 OLED Display (x1) ($3.00)
+- 20 Step Rotary Encoder (x4) ($2.00)
 - Tactile Buttons (x2)
 - LED (x1)
 - On/Off Switch (x1)
