@@ -1,10 +1,5 @@
 # macropad
 
-cpu and ram usage graph
-network information
-music
-weather
-
 
 ## Device Drivers
 
@@ -18,7 +13,7 @@ The macropad is still useable without the drivers, the OLED display will not dis
     2. `pip install psutil`
     3. `pip install speedtest-cli`
 5. Plug in macropad
-6. Run `macropad.py`
+6. Run `macropad.pyw`
 
 
 To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe`
@@ -72,8 +67,13 @@ The macropad should already have code uploaded to it, however if you want to edi
   1. Date & Time
   2. CPU Usage, Frequency, Cores, & Threads
   3. RAM Usage & Total
+  4. *Network Information (ping, up, down, ip)
+  5. *Computer Media Info
+  6. *Weather
 - Button 1
 - Button 2
+
+* wip, add graphs?
 
 
 ## Pins
@@ -84,3 +84,5 @@ The macropad should already have code uploaded to it, however if you want to edi
 - oled buttons: 2 *
 
 total required pins: 20
+
+* read and written to by the board
