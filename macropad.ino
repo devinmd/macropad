@@ -149,6 +149,9 @@ void draw(void)
   // 1px gap between characters
   display.clearDisplay();
   display.setTextColor(SSD1306_WHITE);
+  // flip
+    display.setRotation(90);
+
 
   // handle data
   String arr[5];
