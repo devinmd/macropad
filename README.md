@@ -1,30 +1,26 @@
 # macropad
 
-
 ## Device Drivers
 
-The macropad is still useable without the drivers, the OLED display will not display any information however
+Python script to run OLED Display, updated frquentley
+<br>
+Python app with GUI in progress
 
 1. Install python from [python.org](https://python.org)
 2. Download `macropad.pyw`
-3. Open command line
-4. Run the following commands:
-    1. `pip install pyserial`
-    2. `pip install psutil`
-    3. `pip install speedtest-cli`
+4. Install required Python packages
+    1. Open command line
+    2. `pip install pyserial`
+    3. `pip install psutil`
 5. Plug in macropad
 6. Run `macropad.pyw`
 
-
-To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe`
+To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe` (Windows)
 
 ## Arduino 
-
-The macropad should already have code uploaded to it, however if you want to edit the code and reupload, do the following steps
-
 1. Download Arduino IDE
 2. Plug in board
-3. Add Board
+3. Add Board to Arduino IDE
     1. `File > Preferences`
     2. `Additional Boards Manager URLs`
     3. Add `https://raw.githubusercontent.com/sparkfun/Arduino_Boards/master/IDE_Board_Manager/package_sparkfun_index.json` to the text box
@@ -43,17 +39,17 @@ The macropad should already have code uploaded to it, however if you want to edi
 6. Upload Code
     1. `Tools > Port:`
     2. Select the correct port
-    3. Upload the code
+    3. Upload code
 
 
 ## Parts
-- SparkFun Pro Micro (Clone) (x1) ($7.00)
+- SparkFun Pro Micro (Clone) (x1) (~$7.00)
   - Processor: ATMega32U4
   - Flash Memory: 32kb
   - Clock Speed: 16Mhz
   - Voltage: 5v
-- 12C 128x64 OLED Display (x1) ($3.00)
-- 20 Step Rotary Encoder (x4) ($2.00)
+- 12C 128x64 OLED Display (x1) (~$3.00)
+- 20 Step Rotary Encoder (x4) (~$2.00)
 - Tactile Buttons (x2)
 - LED (x1)
 - On/Off Switch (x1)
