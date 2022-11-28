@@ -71,14 +71,26 @@ To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe` (
 
 * wip, add graphs?
 
-
 ## Pins
-- 5v & gnd = 2
-- rotary encoders: 12 *
-- buttons: 2 *
+- 5v & gnd: 2
+- rotary encoders: 12
+- buttons: 2
 - oled: 2
 - oled buttons: 2 *
 
 total required pins: 20
 
 * read and written to by the board
+
+## Design Guidelines
+
+Keycap & Rotary Encoder Knob Sizing
+- 18x18mm
+- 2mm between keys & knobs
+
+Surface Angle
+- 5-15 degrees
+
+OLED Dimensions:
+- 128x64 pixels
+- 0x0mm
