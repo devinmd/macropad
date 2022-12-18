@@ -48,7 +48,7 @@ To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe` (
   - Flash Memory: 32kb
   - Clock Speed: 16Mhz
   - Voltage: 5v
-- 12C 128x64 OLED Display (x1) (~$3.00)
+- I2c 128x64 OLED Display (x1) (~$3.00)
 - 20 Step Rotary Encoder (x4) (~$2.00)
 - Tactile Buttons (x2)
 - LED (x1)
