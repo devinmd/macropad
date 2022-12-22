@@ -76,7 +76,7 @@ void loop()
   {
     if (c == HIGH && d == LOW)
     {
-      // rotary encoder right
+      // rotary encoder rotate right
       Consumer.write(MEDIA_VOLUME_UP);
       // Keyboard.press(KEY_LEFT_GUI);
       // Keyboard.press('y');
@@ -84,7 +84,7 @@ void loop()
     }
     else if (c == LOW && d == HIGH)
     {
-      // rotary encoder left
+      // rotary encoder rotate left
       Consumer.write(MEDIA_VOLUME_DOWN);
       // Keyboard.press(KEY_LEFT_GUI);
       // Keyboard.press('z');
@@ -95,7 +95,7 @@ void loop()
 
   if (last_s == HIGH && s == LOW)
   {
-    // rotary encoder button button
+    // rotary encoder button
     Consumer.write(MEDIA_VOLUME_MUTE);
     // Keyboard.press(KEY_LEFT_GUI);
     // Keyboard.press('0');
