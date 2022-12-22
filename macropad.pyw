@@ -16,7 +16,7 @@ go through all the ports to find correct one
 
 try:
 	arduino = serial.Serial(port='COM4', baudrate=9600, timeout=.1)
-	print("Running on port: COM5")
+	print("Running on port: COM4")
 except:
 	try:
 		arduino = serial.Serial(port='COM5', baudrate=9600, timeout=.1)

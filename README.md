@@ -29,10 +29,9 @@ To exit the driver script run the follow command `TASKKILL /F /IM pythonw.exe` (
     6. `Tools > Board: > SparkFun AVR Boards > SparkFun Pro Micro`
     7. `Tools > Processor > ATMega32U4 (5v, 16 Mhz)` 
 4. Install HID-Project Library (Keyboard)
-    1. Go to [https://github.com/NicoHood/HID](https://github.com/NicoHood/HID)
-    2. Download the code as a ZIP
-    3. `Sketch > Include Library > Add .ZIP Library...`
-    4. Select `HID-master.zip` from your files
+    1. Download the code from [https://github.com/NicoHood/HID](https://github.com/NicoHood/HID) as a ZIP
+    2. `Sketch > Include Library > Add .ZIP Library...`
+    3. Select `HID-master.zip` from your files
 5. Install Adafruit SSD1306 Library (OLED)
     1. `Sketch > Include Library > Manage Libraries`
     2. Install `"Adafruit SSD1306"` along with it's dependencies
@@ -93,4 +92,4 @@ Surface Angle
 
 OLED Dimensions:
 - 128x64 pixels
-- 0x0mm
+- 25x17mm
